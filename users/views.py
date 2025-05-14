@@ -48,7 +48,7 @@ class MakeLoginView(View):
     def post(self, request, *args, **kwargs):
         data = request.POST
         email = data['email']
-        password1 = data['password1']
+        password = data['password']
 
         try:
             user = CustomUser.objects.get(email=email)
@@ -57,7 +57,7 @@ class MakeLoginView(View):
 
 
 
-        correct = user.check_password(password1)
+        correct = user.check_password(password)
 
         if correct == True:
             login(request, user)
