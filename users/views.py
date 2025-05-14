@@ -20,18 +20,24 @@ class MakeUserRegistrationView(View):
         password1 = data['password1']
         password2 = data['password2']
 
-        if password1 == password2:
+        if password1 != password2:
+            return HttpResponse('Вы неправильно ввели пароль')
 
-            first_name = data['firstName']
-            last_name = data['lastName']
-            email = data['email']
-            user = CustomUser.objects.create_user(
-                email=email, password1=password1,
-                first_name=first_name, last_name=last_name,
+        first_name = data['firstName']
+        last_name = data['lastName']
+        email = data['email']
+
+        if CustomUser.objects.filter(email=email).exists():
+            return HttpResponse('Пользователь с таким email уже зарегистрирован')
+
+        user = CustomUser.objects.create_user(
+            email=email, password1=password1,
+            first_name=first_name, last_name=last_name,
             )
-            return redirect('home-url')
-        else:
-            return HttpResponse('Вы  не правильно ввели пароль')
+
+        login(request, user)
+        return redirect('home-url')
+
 
 
 class LoginListView(TemplateView):
@@ -42,7 +48,7 @@ class MakeLoginView(View):
     def post(self, request, *args, **kwargs):
         data = request.POST
         email = data['email']
-        password = data['password']
+        password1 = data['password1']
 
         try:
             user = CustomUser.objects.get(email=email)
@@ -51,7 +57,7 @@ class MakeLoginView(View):
 
 
 
-        correct = user.check_password(password)
+        correct = user.check_password(password1)
 
         if correct == True:
             login(request, user)
