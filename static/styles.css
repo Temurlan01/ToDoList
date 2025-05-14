@@ -1,0 +1,155 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to right, #e0eafc, #cfdef3);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+}
+
+.container {
+  background-color: white;
+  max-width: 600px;
+  width: 90%;
+  margin: 40px auto;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* === ЗАГОЛОВКИ === */
+h1 {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 25px;
+}
+
+/* === ИНПУТЫ И ФОРМЫ === */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  padding: 12px 16px;
+  font-size: 16px;
+  border: 1px solid #dcdcdc;
+  border-radius: 10px;
+  transition: border-color 0.3s;
+}
+
+input:focus {
+  border-color: #3498db;
+  outline: none;
+}
+
+/* === КНОПКИ === */
+button {
+  padding: 12px;
+  font-size: 16 px;
+  background-color: #00008B;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background-color: #2980b9;
+}
+
+/* === ССЫЛКИ === */
+a {
+  color: #3498db;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* === СПИСОК ЗАДАЧ === */
+.task-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+.task-list li {
+  background-color: #f4f6f8;
+  border-radius: 10px;
+  padding: 15px 20px;
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.task-list li:hover {
+  background-color: #e8eef3;
+}
+
+.task-list.done li span {
+  text-decoration: line-through;
+  background-color: #d1f7d6;
+  opacity: 0.7;
+}
+
+/* === КНОПКИ ВНУТРИ СПИСКА === */
+.buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.buttons button {
+  padding: 6px 10px;
+  font-size: 14px;
+  border-radius: 6px;
+}
+
+.buttons button:first-child {
+  background-color: #00008B;
+}
+
+.buttons button.delete-btn {
+  background-color: #00008B;
+}
+
+.buttons button:hover {
+  opacity: 0.9;
+}
+
+/* === ВЫХОД И ССЫЛКИ === */
+.container a {
+  display: block;
+  text-align: center;
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+
+
+.small-button {
+    padding: 5px 10px;
+    font-size: 12px;
+    background-color: #00008B;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.small-button:hover {
+    background-color: #d32f2f;
+}

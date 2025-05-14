@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Задачи</title>
+  <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+  <div class="container">
+    {% if user.is_authenticated %}
+    <form method="post" action="{% url 'logout-url' %}" style="display: inline;">
+      {% csrf_token %}
+      <button type="submit" class="small-button">Выйти</button>
+    </form>
+      <div class="info">
+        <h1>Пользователь: {{ user.first_name }} {{user.last_name}}</h1>
+      </div>
+      <form class="add-task-form" action="{% url 'addTask-url' %}" method="POST">
+        {% csrf_token %}
+        <input type="text" name="text" placeholder="Новая задача..." required>
+        <button type="submit" >Добавить</button>
+      </form>
+      <ul class="task-list">
+        {% for task in tasks_active %}
+          <li>
+            <span>{{ task.text }}</span>
+            <div class="buttons">
+              <form method="POST" action="{% url 'mark-done-url' task.id %}" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit">✅</button>
+              </form>
+              <form method="POST" action="{% url 'deleteTask-url' task.id %}" >
+                {% csrf_token %}
+                <button type="submit">❌</button>
+              </form>
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
+      <ul class="task-list done">
+        {% for task in tasks_done %}
+          <li style="opacity: 0.6;">
+            <span>{{ task.text }}</span>
+            <form method="POST" action="{% url 'deleteTask-url' task.id %}">
+              {% csrf_token %}
+              <button type="submit">❌</button>
+            </form>
+          </li>
+        {% endfor %}
+      </ul>
+
+
+    {% endif %}
+  </div>
+</body>
+</html>

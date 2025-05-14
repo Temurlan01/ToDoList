@@ -1,0 +1,24 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Регистрация</title>
+  <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+  <div class="container">
+    <h1>Регистрация</h1>
+    <form action=" {% url 'make-registration-url' %} " method="POST">
+      {% csrf_token %}
+      <input type="text" name="firstName" placeholder="Имя" required>
+      <input type="text" name="lastName" placeholder="Фамилия" required>
+      <input type="email" name="email" placeholder="Email" required>
+      <input type="password" name="password1" placeholder="Пароль" required>
+      <input type="password" name="password2" placeholder="Подтвердите пароль" required>
+      <button type="submit">Зарегистрироваться</button>
+    </form>
+    <p>Уже есть аккаунт? <a href="{% url 'login-url' %}">Войти</a></p>
+  </div>
+</body>
+</html>
