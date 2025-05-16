@@ -11,7 +11,7 @@ class CustomUser(AbstractUser):
     REQUIRED_FIELDS = []
 
     email = models.EmailField(unique=True, db_index=True, max_length=50, default=None)
-
+    avatar = models.ImageField(upload_to='avatars/', blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     objects = CustomUserManager()
 

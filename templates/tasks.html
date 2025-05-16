@@ -7,13 +7,29 @@
   <link rel="stylesheet" href="{% static 'styles.css' %}">
 </head>
 <body>
+
   <div class="container">
     {% if user.is_authenticated %}
     <form method="post" action="{% url 'logout-url' %}" style="display: inline;">
       {% csrf_token %}
       <button type="submit" class="small-button">Выйти</button>
     </form>
-      <div class="info">
+    <div class="info">
+        <div class="avatar-block">
+          {% if user.avatar %}
+            <img src="{{ user.avatar.url }}" alt="Аватарка" class="avatar">
+          {% else %}
+            <img src="{% static 'default-avatar.png' %}" alt="Аватарка" class="avatar">
+          {% endif %}
+
+          <form method="POST" action="{% url 'upload-avatar-url' %}" enctype="multipart/form-data" class="avatar-form">
+            {% csrf_token %}
+            <label for="avatar">Изменить фото:</label>
+            <input type="file" name="avatar" accept="image/*" required>
+            <button type="submit">Загрузить</button>
+          </form>
+        </div>
+
         <h1>Пользователь: {{ user.first_name }} {{user.last_name}}</h1>
       </div>
       <form class="add-task-form" action="{% url 'addTask-url' %}" method="POST">

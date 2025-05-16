@@ -153,3 +153,42 @@ a:hover {
 .small-button:hover {
     background-color: #d32f2f;
 }
+.avatar-block {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.avatar {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+}
+
+.avatar-form {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.avatar-form input[type="file"] {
+  padding: 3px;
+  font-size: 14px;
+}
+
+.avatar-form button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 6px 1px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.avatar-form button:hover {
+  background-color: #45a049;
+}

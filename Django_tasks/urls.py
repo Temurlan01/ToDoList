@@ -3,7 +3,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
 
-from tasks.views import HomeView, ProfileView, AddTaskView, DeleteTaskView, MarkDoneView
+from tasks.views import HomeView, ProfileView, AddTaskView, DeleteTaskView, MarkDoneView, UploadAvatarView
 from users.views import UserRegistrationView, LoginListView, MakeUserRegistrationView, MakeLoginView, MakeLogoutView
 
 urlpatterns = [
@@ -21,6 +21,8 @@ urlpatterns = [
     path('addTask/', AddTaskView.as_view(), name='addTask-url'),
     path('delete/<int:pk>/', DeleteTaskView.as_view(), name='deleteTask-url'),
     path('done/<int:task_id>/', MarkDoneView.as_view(), name='mark-done-url'),
+
+    path('upload-avatar/', UploadAvatarView.as_view(), name='upload-avatar-url'),
 
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
