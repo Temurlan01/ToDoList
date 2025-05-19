@@ -9,14 +9,14 @@ from users.models import CustomUser
 
 class UserRegistrationView(TemplateView):
     """
-    вьюшка для того что бы показывать страницу лоя регистрации
+    Вью для того что бы показывать страницу лоя регистрации
     """
     template_name = 'register.html'
 
 
 class MakeUserRegistrationView(View):
     """
-    вьюшка для того чтобы регистрировать пользователя
+    Вью для того чтобы регистрировать пользователя
     """
 
     def post(self, request, *args, **kwargs):
@@ -48,14 +48,14 @@ class MakeUserRegistrationView(View):
 
 class LoginListView(TemplateView):
     """
-    вьюшка для показа страницы для логина
+    Вью для показа страницы для логина
     """
     template_name = 'Login.html'
 
 
 class MakeLoginView(View):
     """
-    вьюшка для того что бы пользователь мог входить в акк
+    Вью для того что бы пользователь мог входить в акк
     """
     def post(self, request,):
         data = request.POST
@@ -78,7 +78,7 @@ class MakeLoginView(View):
 
 class MakeLogoutView(View):
     """
-    вьюшка для выхода из акк
+    Вью для выхода из акк
     """
     def post(self, request, *args, **kwargs):
         logout(request)
