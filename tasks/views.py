@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import  redirect, get_object_or_404
 from django.utils.decorators import method_decorator
 from django.views import View
@@ -7,16 +8,13 @@ from django.contrib import messages
 from tasks.models import Task
 
 
-class HomeView(TemplateView):
+class HomeView(LoginRequiredMixin,TemplateView):
     """
-    вьюшка для показа домашней страницы
+    Вью для показа домашней страницы
     """
 
     template_name = 'tasks.html'
-    def dispatch(self, request, *args, **kwargs):
-        if not request.user.is_authenticated:
-            return redirect('login-url')
-        return super().dispatch(request, *args, **kwargs)
+
 
     def get_context_data(self,*args, **kwargs):
 
@@ -33,14 +31,11 @@ class HomeView(TemplateView):
 
 
 
-class ProfileView(TemplateView):
+class ProfileView(LoginRequiredMixin,TemplateView):
     """
-     вьюшка для того что бы показать профиль пользователя
+    Вьюшка для того что бы показать профиль пользователя
     """
-    def dispatch(self, request, *args, **kwargs):
-        if not request.user.is_authenticated:
-            return redirect('login-url')
-        return super().dispatch(request, *args, **kwargs)
+
 
     def get_context_data(self,*args,**kwargs):
 
@@ -54,7 +49,7 @@ class ProfileView(TemplateView):
 
 class AddTaskView(View):
     """
-    вьюшка для того что бы добавить задачу
+    Вью для того что бы добавить задачу
     """
 
     def post(self, request, *args, **kwargs):
@@ -66,7 +61,7 @@ class AddTaskView(View):
 
 class DeleteTaskView(View):
     """
-    вьюшка для того что бы удалить задачи
+    Вью для того что бы удалить задачи
     """
 
     def post(self, request, pk):
@@ -78,7 +73,7 @@ class DeleteTaskView(View):
 
 class MarkDoneView(View):
     """
-    вьюшка для того что пометить задачи прочитанными
+    Вью для того что пометить задачи прочитанными
     """
 
     def post(self, request, task_id):
@@ -91,7 +86,7 @@ class MarkDoneView(View):
 
 class UploadAvatarView(View):
     """
-    вьюшка для того что бы загрузить фото профиля
+    Вью для того что бы загрузить фото профиля
     """
 
     @method_decorator(login_required)
@@ -103,7 +98,7 @@ class UploadAvatarView(View):
             user.avatar = avatar
             user.save()
             return redirect('home-url')
-        return messages.error(request,'Файл не был загружен')
+        messages.error(request,'Файл не был загружен')
 
 
 
