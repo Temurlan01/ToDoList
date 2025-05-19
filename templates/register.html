@@ -11,13 +11,20 @@
     <h1>Регистрация</h1>
     <form action=" {% url 'make-registration-url' %} " method="POST">
       {% csrf_token %}
-      <input type="text" name="firstName" placeholder="Имя" required>
-      <input type="text" name="lastName" placeholder="Фамилия" required>
+      <input type="text" name="first_name" placeholder="Имя" required>
+      <input type="text" name="last_name" placeholder="Фамилия" required>
       <input type="email" name="email" placeholder="Email" required>
       <input type="password" name="password1" placeholder="Пароль" required>
       <input type="password" name="password2" placeholder="Подтвердите пароль" required>
       <button type="submit">Зарегистрироваться</button>
     </form>
+    {% if messages %}
+      <ul class="messages">
+        {% for message in messages %}
+          <li class="{{ message.tags }}">{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
     <p>Уже есть аккаунт? <a href="{% url 'login-url' %}">Войти</a></p>
   </div>
 </body>
